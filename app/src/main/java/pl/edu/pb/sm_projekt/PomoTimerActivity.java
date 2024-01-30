@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -161,8 +162,23 @@ public class PomoTimerActivity extends AppCompatActivity {
                 // Show the notification only if the timer finished naturally (not stopped by the user)
                 if (timerRunning) {
                     showNotification("Pomo Timer", "You did it!");
+                    // Play alarm sound
+                    playAlarm();
                 }
             }
+            private void playAlarm() {
+                // Use the specific sound file 'mixkit_alarm_tone_996.wav'
+                MediaPlayer mediaPlayer = MediaPlayer.create(PomoTimerActivity.this, R.raw.mixkit_alarm_tone_996);
+                mediaPlayer.start();
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mediaPlayer.release();
+                    }
+                });
+            }
+
+
         }.start();
 
         // Show snackbar 'timer started' only when the timer is initially started
