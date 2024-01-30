@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class MainActivity extends AppCompatActivity {
 
     // declarations
@@ -62,10 +64,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void openNewActivity(int prog) {
+        // Pass the onFinish callback to PomoTimerActivity
+        PomoTimerActivity.OnFinishCallback onFinishCallback = new PomoTimerActivity.OnFinishCallback() {
+            @Override
+            public void onFinish() {
+                // Handle onFinish event in MainActivity (update UI or perform other actions)
+                // Display a Snackbar message instead of Toast
+                View rootView = findViewById(android.R.id.content);
+                Snackbar.make(rootView, "Pomodoro completed!", Snackbar.LENGTH_SHORT).show();
+            }
+        };
+
+        // Set the callback in the holder class
+        FinishCallbackHolder.setOnFinishCallback(onFinishCallback);
+
         Intent intent = new Intent(this, PomoTimerActivity.class);
         intent.putExtra("prog", prog);
         startActivity(intent);
-    }
-}
+    }}
