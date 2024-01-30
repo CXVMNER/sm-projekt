@@ -163,22 +163,9 @@ public class PomoTimerActivity extends AppCompatActivity {
                 if (timerRunning) {
                     showNotification("Pomo Timer", "You did it!");
                     // Play alarm sound
-                    playAlarm();
+                    AlarmPlayer.playAlarm(PomoTimerActivity.this);
                 }
             }
-            private void playAlarm() {
-                // Use the specific sound file 'mixkit_alarm_tone_996.wav'
-                MediaPlayer mediaPlayer = MediaPlayer.create(PomoTimerActivity.this, R.raw.mixkit_alarm_tone_996);
-                mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.release();
-                    }
-                });
-            }
-
-
         }.start();
 
         // Show snackbar 'timer started' only when the timer is initially started
