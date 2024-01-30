@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -94,6 +93,12 @@ public class PomoTimerActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        // Aktywność staje się widoczna dla użytkownika
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         // Register the sensor listener when the activity resumes
@@ -110,6 +115,18 @@ public class PomoTimerActivity extends AppCompatActivity {
         // Unregister the sensor listener when the activity pauses
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensorManager.unregisterListener(shakeDetector);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // Aktywność staje się niewidoczna dla użytkownika
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Zniszczenie aktywności, np. zwolnienie zasobów
     }
 
     private void createNotificationChannel() {
@@ -131,7 +148,7 @@ public class PomoTimerActivity extends AppCompatActivity {
             stopTimer(duration); // will stop the running timer
         } else {
             // Snackbar 'timer started'
-            showSnackbar("Timer started");
+            showSnackbar(R.string.timer_started);
             startTimer(duration); // will start the countdown
         }
     }
@@ -157,7 +174,7 @@ public class PomoTimerActivity extends AppCompatActivity {
                 countdownText.setText(default_duration);
 
                 // Snackbar 'you did it!!!'
-                showSnackbar("You did it!");
+                showSnackbar(R.string.you_did_it);
 
                 // Show the notification only if the timer finished naturally (not stopped by the user)
                 if (timerRunning) {
@@ -170,7 +187,7 @@ public class PomoTimerActivity extends AppCompatActivity {
 
         // Show snackbar 'timer started' only when the timer is initially started
         if (!timerRunning) {
-            showSnackbar("Timer started");
+            showSnackbar(R.string.timer_started);
         }
 
         countdownButton.setText("Give Up");
@@ -187,7 +204,7 @@ public class PomoTimerActivity extends AppCompatActivity {
         countdownButton.setText("START");
 
         // Snackbar 'timer stopped'
-        showSnackbar("Timer stopped");
+        showSnackbar(R.string.timer_stopped);
     }
 
     public void updateTimer() {
@@ -204,9 +221,9 @@ public class PomoTimerActivity extends AppCompatActivity {
         countdownText.setText(timeLeftText);
     }
 
-    private void showSnackbar(String message) {
+    private void showSnackbar(int resId) {
         View rootView = findViewById(android.R.id.content);
-        Snackbar snackbar = Snackbar.make(rootView, message, Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(rootView, getString(resId), Snackbar.LENGTH_SHORT);
 
         // Set the anchor view to the countdownButton or another appropriate view
         snackbar.setAnchorView(countdownButton);
