@@ -7,4 +7,9 @@
         android:title="Settings"
         app:showAsAction="never" />
     <!-- Możesz dodać więcej pozycji menu tutaj -->
+
+    <item
+        android:id="@+id/action_open_youtube"
+        android:title="Open YouTube"
+        app:showAsAction="never" />
 </menu>

@@ -8,22 +8,49 @@
     android:orientation="vertical"
     tools:context=".PomoTimerActivity">
 
-    <TextView
-        android:id="@+id/countdownText"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:text="@string/_00_n00"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        android:textSize="100sp" />
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
 
-    <Button
-        android:id="@+id/countdownButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/start"
-        android:textColor="#0A0101" />
+        <!-- Wnętrze CardView -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <!-- Text View for countdown -->
+            <TextView
+                android:id="@+id/countdownText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="@string/_00_n00"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                android:textSize="100sp" />
+
+            <!-- Button to start countdown -->
+            <Button
+                android:id="@+id/countdownButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/start"
+                android:textColor="#0A0101" />
+
+            <!-- Animated Circle View -->
+            <pl.edu.pb.sm_projekt.AnimatedCircleView
+                android:id="@+id/animatedCircleView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>

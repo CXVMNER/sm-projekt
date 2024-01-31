@@ -57,7 +57,7 @@ public class PomoTimerActivity extends AppCompatActivity {
 
     // Add a custom constructor with the OnFinishCallback
     public PomoTimerActivity(OnFinishCallback onFinishCallback) {
-        this.onFinishCallback = onFinishCallback;
+        PomoTimerActivity.onFinishCallback = onFinishCallback;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class PomoTimerActivity extends AppCompatActivity {
 
         Intent mIntent = getIntent();
         final int duration = mIntent.getIntExtra("prog", 150000);
-        timeLeftInms = duration * 60 * 1000;
+        timeLeftInms = (long) duration * 60 * 1000;
 
         String default_duration;
         if (duration < 10) {
@@ -162,11 +162,13 @@ public class PomoTimerActivity extends AppCompatActivity {
     }
 
     public void startTimer(final int duration) {
-        countdownTimer = new CountDownTimer(duration * 60000, 1000) {
+        countdownTimer = new CountDownTimer(duration * 60000L, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInms = millisUntilFinished;
                 updateTimer(); // will update the timer text from 25:00 to 24:59...
+                AnimatedCircleView animatedCircleView = findViewById(R.id.animatedCircleView);
+                animatedCircleView.setRadius((float) (millisUntilFinished / (duration * 60000.0)));
             }
 
             @Override
@@ -208,7 +210,7 @@ public class PomoTimerActivity extends AppCompatActivity {
         String show_duration = (duration < 10) ? "0" + duration : "" + duration;
         show_duration += "\n00";
         countdownText.setText(show_duration);
-        timeLeftInms = duration * 60000;
+        timeLeftInms = duration * 60000L;
         countdownButton.setText("START");
 
         // Snackbar 'timer stopped'

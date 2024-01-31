@@ -11,4 +11,6 @@
     <string name="timer_started">Timer started</string>
     <string name="timer_stopped">Timer stopped</string>
     <string name="you_did_it">You did it!</string>
+
+    <string name="no_app_to_handle_intent">No app available to handle this action</string>
 </resources>

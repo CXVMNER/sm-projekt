@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,8 +16,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     TextView timeDurationText;
     Button okButton;
     int prog;
+
+    private RecyclerView recyclerView;
+    private PomoAdapter adapter;
+    private List<PomoItem> pomoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PomoTimerActivity.class);
         intent.putExtra("prog", prog);
         startActivity(intent);
+
+        // Initialize the pomoList
+        pomoList = new ArrayList<>();
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new PomoAdapter(pomoList);
+        recyclerView.setAdapter(adapter);
 
         //declarations
         prog = 25;
@@ -141,13 +160,27 @@ public class MainActivity extends AppCompatActivity {
         int itemId = item.getItemId();
 
         if (itemId == R.id.action_settings) {
-            // Handle the Settings option here
+            openSettingsActivity();
+            return true;
+        } else if (itemId == R.id.action_open_youtube) {
+            openYouTubeLink();
             return true;
         }
-        // Add additional conditions for other menu items if needed
-
         return super.onOptionsItemSelected(item);
     }
+
+    private void openSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void openYouTubeLink() {
+        String youtubeUrl = "https://www.youtube.com/";
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+        startActivity(intent);
+    }
+
 
     public void openNewActivity(int prog) {
         // Pass the onFinish callback to PomoTimerActivity

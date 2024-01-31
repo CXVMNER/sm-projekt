@@ -6,50 +6,58 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/time4pomo"
-        android:layout_width="301dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="80dp"
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/timeDurationText"
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toTopOf="@id/button1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/timeDurationText"
-        android:layout_width="162dp"
-        android:layout_height="74dp"
-        android:layout_marginTop="156dp"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time4pomo" />
+        <!-- Wnętrze CardView -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <SeekBar
-        android:id="@+id/timeDuration"
-        android:layout_width="302dp"
-        android:layout_height="66dp"
-        app:layout_constraintBottom_toTopOf="@+id/button1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeDurationText"
-        app:layout_constraintVertical_bias="0.167" />
+            <!-- Tutaj dodaj inne elementy UI -->
+
+            <TextView
+                android:id="@+id/time4pomo"
+                android:layout_width="301dp"
+                android:layout_height="80dp"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/timeDurationText"
+                android:layout_width="162dp"
+                android:layout_height="74dp"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <SeekBar
+                android:id="@+id/timeDuration"
+                android:layout_width="302dp"
+                android:layout_height="66dp" />
+
+            <!-- Przyciski, itp. -->
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="109dp"
-        android:layout_marginBottom="96dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@android:string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,5 +70,16 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button1"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

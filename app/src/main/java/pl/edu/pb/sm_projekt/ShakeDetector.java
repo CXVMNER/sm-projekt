@@ -12,7 +12,7 @@ class ShakeDetector implements SensorEventListener {
 
     private long lastShakeTime;
 
-    private OnShakeListener onShakeListener;
+    private final OnShakeListener onShakeListener;
 
     public interface OnShakeListener {
         void onShake();
