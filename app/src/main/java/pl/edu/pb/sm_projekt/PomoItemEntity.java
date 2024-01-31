@@ -3,28 +3,25 @@ package pl.edu.pb.sm_projekt;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-// PomoItem.java
+import androidx.room.TypeConverters;
+
+@TypeConverters(Converters.class)
 @Entity(tableName = "pomo_items")
-public class PomoItem {
+public class PomoItemEntity {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private final String title;
-    private final int duration;
 
-    public PomoItem(String title, int duration) {
+    private String title;
+    private int duration;
+
+    public PomoItemEntity(String title, int duration) {
         this.title = title;
         this.duration = duration;
     }
 
-    // Getter for the id field
     public int getId() {
         return id;
-    }
-
-    // Setter for the id field (if needed)
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -33,5 +30,9 @@ public class PomoItem {
 
     public int getDuration() {
         return duration;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

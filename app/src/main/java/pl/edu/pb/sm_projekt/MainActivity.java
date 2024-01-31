@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private PomoAdapter adapter;
-    private List<PomoItem> pomoList;
+    //private List<PomoItem> pomoList;
+
+    private PomoDatabase pomoDatabase; // Add database reference
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +51,10 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("prog", prog);
         startActivity(intent);
 
-        // Initialize the pomoList
-        pomoList = new ArrayList<>();
-
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new PomoAdapter(pomoList);
+        //adapter = new PomoAdapter(pomoList);
         recyclerView.setAdapter(adapter);
 
         //declarations
