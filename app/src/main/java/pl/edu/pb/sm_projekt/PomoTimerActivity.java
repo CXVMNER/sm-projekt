@@ -40,7 +40,15 @@ public class PomoTimerActivity extends AppCompatActivity {
         void onFinish();
     }
 
-    private OnFinishCallback onFinishCallback;
+    private static OnFinishCallback onFinishCallback;
+
+    public static void setOnFinishCallback(OnFinishCallback callback) {
+        onFinishCallback = callback;
+    }
+
+    public static OnFinishCallback getOnFinishCallback() {
+        return onFinishCallback;
+    }
 
     // Add a default (zero-argument) constructor
     public PomoTimerActivity() {

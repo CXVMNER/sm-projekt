@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -27,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        Intent intent = new Intent(this, PomoTimerActivity.class);
+        intent.putExtra("prog", prog);
+        startActivity(intent);
 
         //declarations
         prog = 25;
@@ -118,9 +129,29 @@ public class MainActivity extends AppCompatActivity {
         // Tu możesz przywrócić stan aktywności po zakończeniu onStop
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.action_settings) {
+            // Handle the Settings option here
+            return true;
+        }
+        // Add additional conditions for other menu items if needed
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public void openNewActivity(int prog) {
         // Pass the onFinish callback to PomoTimerActivity
-        PomoTimerActivity.OnFinishCallback onFinishCallback = new PomoTimerActivity.OnFinishCallback() {
+        PomoTimerActivity.setOnFinishCallback(new PomoTimerActivity.OnFinishCallback() {
             @Override
             public void onFinish() {
                 // Handle onFinish event in MainActivity (update UI or perform other actions)
@@ -128,10 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 View rootView = findViewById(android.R.id.content);
                 Snackbar.make(rootView, R.string.pomodoro_completed, Snackbar.LENGTH_SHORT).show();
             }
-        };
-
-        // Set the callback in the holder class
-        FinishCallbackHolder.setOnFinishCallback(onFinishCallback);
+        });
 
         Intent intent = new Intent(this, PomoTimerActivity.class);
         intent.putExtra("prog", prog);
