@@ -1,6 +1,7 @@
 package pl.edu.pb.sm_projekt;
 
 import androidx.room.TypeConverter;
+
 import java.util.Date;
 
 public class Converters {

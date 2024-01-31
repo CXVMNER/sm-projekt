@@ -1,6 +1,7 @@
 package pl.edu.pb.sm_projekt;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
